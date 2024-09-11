@@ -1,2 +1,3 @@
 # shared-actions
-Reusable GitHub Actions for CI/CD automation
+
+This repository includes Github actions which are shared among multiple repositories.
