@@ -1,7 +1,11 @@
-name: Run tests with ci
-on: [push, workflow_dispatch]
-env:
-  NODE_VERSION: 20
+name: Build Project
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Node.js version to use"
+        required: true
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,7 +20,7 @@ jobs:
       - name: Install NodeJs
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ inputs.node-version }}
       - name: Install dependencies
         run: npm ci
       - name: Build project

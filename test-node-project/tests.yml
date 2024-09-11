@@ -1,7 +1,16 @@
-name: CI build
-on: [push, workflow_dispatch]
+name: Run Tests with CI
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Node.js version to use"
+        required: true
+        default: "20"
+    secrets:
+      GITHUB_TOKEN:
+        required: true
 env:
-  NODE_VERSION: 20
+  NODE_VERSION: ${{ inputs.node-version }}
 jobs:
   test:
     runs-on: ubuntu-latest
