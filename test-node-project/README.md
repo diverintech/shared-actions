@@ -20,5 +20,5 @@ You can include this workflow in another repository by referencing it as follows
 ```yaml
 jobs:
   test:
-    uses: diverintech/shared-actions/test-node-project/node-ci-tests.yml@v1.0.0
+    uses: diverintech/shared-actions/test-node-project/tests.yml@v1.0.0
 ```
