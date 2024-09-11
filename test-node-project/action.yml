@@ -9,28 +9,24 @@ inputs:
     description: "Cache key for dependencies"
     required: true
 
-runs:
-  using: "node12"
-  steps:
-    - name: Get code
-      uses: actions/checkout@v4
-    - name: Cache dependencies
-      uses: actions/cache@v4
-      with:
-        path: ~/.npm
-        key: ${{ inputs.cache-key }}
-    - name: Install NodeJs
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ inputs.node-version }}
-    - name: Install dependencies
-      run: npm install
-    - name: Run tests
-      id: run-tests
-      run: npm run test:ci
-    - name: Upload test report
-      if: failure() && steps.run-tests.outcome == 'failure'
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-report
-        path: test.json
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Install NodeJs
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        id: run-tests
+        run: npm run test:ci
+      - name: Upload test report
+        if: failure() && steps.run-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: test.json
