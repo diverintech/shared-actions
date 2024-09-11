@@ -6,16 +6,11 @@ This repository contains a CI build workflow designed for continuous integration
 
 The workflow is triggered on two events:
 
-push: Every time code is pushed to the repository.
-workflow_dispatch: Manually triggered workflow from the GitHub interface.
+**push:** Every time code is pushed to the repository.
+
+**workflow_dispatch:** Manually triggered workflow from the GitHub interface.
 The workflow consists of two jobs:
 
-Test: Runs tests and caches dependencies to speed up future builds.
-Build: Builds the project after the testing steps have passed.
-Workflow Structure
-Environment Variables
-NODE_VERSION: Specifies the version of Node.js used in the workflow. The default is set to 20.
-Jobs
 
 ## Test
 
