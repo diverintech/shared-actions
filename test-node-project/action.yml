@@ -5,7 +5,7 @@ inputs:
     required: true
     default: "20"
 runs:
-  using: "node12"
+  using: "composite"
   steps:
     - name: Get code
       uses: actions/checkout@v4
@@ -14,9 +14,11 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
     - name: Install dependencies
+      shell: bash
       run: npm install
     - name: Run tests
       id: run-tests
+      shell: bash
       run: npm run test:ci
     - name: Upload test report
       if: failure() && steps.run-tests.outcome == 'failure'
