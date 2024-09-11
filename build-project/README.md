@@ -1,39 +1,23 @@
-# CI Build Workflow
+# Node.js Build GitHub Action
 
-This repository contains a CI build workflow designed for continuous integration, testing, and building of Node.js projects using GitHub Actions.
+This GitHub Action workflow is designed to automate the build process for Node.js projects. It checks out the code, caches dependencies, installs the required Node.js version and dependencies, and then builds the project.
 
 ## Workflow Overview
 
-The workflow is triggered on two events:
+The workflow performs the following steps:
 
-**push:** Every time code is pushed to the repository.
+1. **Checkout Code**: Fetches the latest code from the repository using `actions/checkout@v4`.
+2. **Cache Dependencies**: Caches Node.js dependencies using `actions/cache@v4`, speeding up the installation process on subsequent runs.
+3. **Install Node.js**: Sets up the required Node.js version (version 20) using `actions/setup-node@v4`.
+4. **Install Dependencies**: Runs `npm ci` to install project dependencies in a clean state.
+5. **Build Project**: Runs the `npm run build` command to build the project.
 
-**workflow_dispatch:** Manually triggered workflow from the GitHub interface.
-The workflow consists of two jobs:
+## How to Use
 
+To use this workflow in another repository, you can reference it like this:
 
-## Test
-
-This job handles testing the codebase:
-
-Checks out the repository code.
-Caches dependencies using actions/cache@v4.
-Installs Node.js version specified in the environment variable.
-Installs dependencies using npm install.
-Runs tests using npm run test:ci.
-Uploads test reports only if the tests fail.
-
-## Build
-
-This job handles building the project after successful testing:
-
-Checks out the repository code.
-Caches dependencies using actions/cache@v4.
-Installs Node.js version specified in the environment variable.
-Installs dependencies using npm ci.
-Builds the project using npm run build.
-
-## Customization
-
-Node.js version: Update the NODE_VERSION environment variable to use a different version of Node.js.
-Test command: Customize the test step by modifying the npm run test:ci command to match your project's test scripts.
+```yaml
+jobs:
+  test:
+    uses: diverintech/shared-actions/build-project/build.yml@v1.0.0
+```

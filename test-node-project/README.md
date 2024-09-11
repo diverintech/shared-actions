@@ -1,44 +1,24 @@
-# CI Build Workflow
+# Node.js CI Tests GitHub Action
 
-This repository contains a CI build workflow designed for continuous integration, testing, and building of Node.js projects using GitHub Actions.
+This GitHub Action workflow is designed to automate the testing process for Node.js projects. It handles dependency caching, installation, and runs the test suite, uploading a test report in case of failure.
 
 ## Workflow Overview
 
-The workflow is triggered on two events:
+This workflow performs the following steps:
 
-push: Every time code is pushed to the repository.
-workflow_dispatch: Manually triggered workflow from the GitHub interface.
-The workflow consists of two jobs:
+1. **Checkout Code**: Fetches the latest code from the repository using `actions/checkout@v4`.
+2. **Cache Dependencies**: Caches Node.js dependencies using `actions/cache@v4`, improving build times for subsequent runs.
+3. **Install Node.js**: Sets up Node.js version 20 using `actions/setup-node@v4`.
+4. **Install Dependencies**: Installs the required project dependencies by running `npm install`.
+5. **Run Tests**: Executes the test suite using the `npm run test:ci` command.
+6. **Upload Test Report**: If the tests fail, the workflow uploads the `test.json` file containing the test report using `actions/upload-artifact@v4`.
 
-Test: Runs tests and caches dependencies to speed up future builds.
-Build: Builds the project after the testing steps have passed.
-Workflow Structure
-Environment Variables
-NODE_VERSION: Specifies the version of Node.js used in the workflow. The default is set to 20.
-Jobs
+## How to Use
 
-## 1. Test
+You can include this workflow in another repository by referencing it as follows:
 
-This job handles testing the codebase:
-
-Checks out the repository code.
-Caches dependencies using actions/cache@v4.
-Installs Node.js version specified in the environment variable.
-Installs dependencies using npm install.
-Runs tests using npm run test:ci.
-Uploads test reports only if the tests fail.
-
-## 2. Build
-
-This job handles building the project after successful testing:
-
-Checks out the repository code.
-Caches dependencies using actions/cache@v4.
-Installs Node.js version specified in the environment variable.
-Installs dependencies using npm ci.
-Builds the project using npm run build.
-
-# Customization
-
-Node.js version: Update the NODE_VERSION environment variable to use a different version of Node.js.
-Test command: Customize the test step by modifying the npm run test:ci command to match your project's test scripts.
+```yaml
+jobs:
+  test:
+    uses: diverintech/shared-actions/test-node-project/node-ci-tests.yml@v1.0.0
+```
