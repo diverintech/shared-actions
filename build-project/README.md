@@ -17,7 +17,7 @@ Environment Variables
 NODE_VERSION: Specifies the version of Node.js used in the workflow. The default is set to 20.
 Jobs
 
-## 1. Test
+## Test
 
 This job handles testing the codebase:
 
@@ -28,7 +28,7 @@ Installs dependencies using npm install.
 Runs tests using npm run test:ci.
 Uploads test reports only if the tests fail.
 
-## 2. Build
+## Build
 
 This job handles building the project after successful testing:
 
@@ -38,7 +38,7 @@ Installs Node.js version specified in the environment variable.
 Installs dependencies using npm ci.
 Builds the project using npm run build.
 
-# Customization
+## Customization
 
 Node.js version: Update the NODE_VERSION environment variable to use a different version of Node.js.
 Test command: Customize the test step by modifying the npm run test:ci command to match your project's test scripts.
