@@ -19,5 +19,5 @@ To use this workflow in another repository, you can reference it like this:
 ```yaml
 jobs:
   test:
-    uses: diverintech/shared-actions/build-project/build.yml@v1.0.0
+    uses: diverintech/shared-actions/build-node-project@v1.0.0
 ```
