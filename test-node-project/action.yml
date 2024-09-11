@@ -1,16 +1,6 @@
 name: Run Tests with CI
-on:
-  workflow_call:
-    inputs:
-      node-version:
-        description: "Node.js version to use"
-        required: true
-        default: "20"
-    secrets:
-      GITHUB_TOKEN:
-        required: true
 env:
-  NODE_VERSION: ${{ inputs.node-version }}
+  NODE_VERSION: 20
 jobs:
   test:
     runs-on: ubuntu-latest
